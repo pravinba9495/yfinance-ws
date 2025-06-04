@@ -10,8 +10,7 @@ def message_handler(message):
     print(">> ", message['id'], message['price'],)
     r.publish("trades", json.dumps({
         "s": message['id'],
-        "p": message['price'],
-        "t": message['time'],
+        "p": message['price']
     }))
 
 async def main():
