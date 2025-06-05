@@ -13,11 +13,13 @@ logging.basicConfig(
 r = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'], db=0)
 
 def message_handler(message):
-    logging.info(message)
-    r.publish("trades", json.dumps({
+    msg = json.dumps({
         "s": message['id'],
-        "p": message['price']
-    }))
+        "p": message['price'],
+        "t": int(message['time']),
+    })
+    logging.info(msg)
+    r.publish("trades", msg)
 
 async def main():
     ws = yf.AsyncWebSocket()
