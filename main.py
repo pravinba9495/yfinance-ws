@@ -13,7 +13,7 @@ logging.basicConfig(
     level=logging.INFO,
     datefmt='%Y/%m/%d %H:%M:%S')
 
-r = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'], db=0) # type: ignore
+r = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'], password=os.environ['REDIS_PASSWORD'], db=0) # type: ignore
 
 def message_handler(message):
     msg = json.dumps({
