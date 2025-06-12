@@ -25,7 +25,7 @@ def message_handler(message):
     r.hset(message['id'], "price", message['price'])
 
     logging.info(msg)
-    r.publish("trades", msg)
+    r.publish(os.environ['REDIS_PUBLISH_CHANNEL'], msg)
 
 async def main():
     ws = yf.AsyncWebSocket()
